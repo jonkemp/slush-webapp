@@ -1,6 +1,6 @@
-# slush-webapp [![Build Status](https://secure.travis-ci.org/jonkemp/slush-webapp.png?branch=master)](https://travis-ci.org/jonkemp/slush-webapp) [![NPM version](https://badge-me.herokuapp.com/api/npm/slush-webapp.png)](http://badges.enytc.com/for/npm/slush-webapp) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jonkemp/slush-webapp/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+# slush-webapp [![Build Status](https://secure.travis-ci.org/jonkemp/slush-webapp.png?branch=master)](https://travis-ci.org/jonkemp/slush-webapp)
 
-> Scaffold out a front-end web app
+> Scaffold out a front-end web app with Gulp
 
 
 ## Getting Started
@@ -35,11 +35,11 @@ $ cd my-slush-webapp && slush webapp
 
 ## Getting To Know Slush
 
-Slush is a tool to be able to use Gulp for project scaffolding.
+Slush is a tool that uses Gulp for project scaffolding.
 
 Slush does not contain anything "out of the box", except the ability to locate installed slush generators and to run them with liftoff.
 
-To be able to provide functionality like Yeoman, see: [Yeoman like behavior below.](https://github.com/klei/slush#yeoman-like-behavior)
+To find out more about Slush, check out the [documentation](https://github.com/klei/slush).
 
 ## Contributing
 
