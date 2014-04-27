@@ -1,6 +1,6 @@
-# slush-webapp [![Build Status](https://secure.travis-ci.org/jonkemp/slush-webapp.png?branch=master)](https://travis-ci.org/jonkemp/slush-webapp)
+# [slush](https://github.com/klei/slush)-webapp [![Build Status](https://secure.travis-ci.org/jonkemp/slush-webapp.png?branch=master)](https://travis-ci.org/jonkemp/slush-webapp)
 
-> Scaffold out a front-end web app with Gulp
+> Scaffold out a front-end web app with [Gulp](https://github.com/gulpjs/gulp)
 
 
 ## Getting Started
