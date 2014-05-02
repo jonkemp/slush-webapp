@@ -1,6 +1,6 @@
 # [slush](https://github.com/klei/slush)-webapp [![Build Status](https://secure.travis-ci.org/jonkemp/slush-webapp.png?branch=master)](https://travis-ci.org/jonkemp/slush-webapp)
 
-> Scaffold out a front-end web app with [Gulp](https://github.com/gulpjs/gulp)
+> Easily scaffold out a front-end web app with [Gulp](https://github.com/gulpjs/gulp)
 
 
 ## Getting Started
@@ -35,18 +35,11 @@ $ cd my-slush-webapp && slush webapp
 
 ## Getting To Know Slush
 
-Slush is a tool that uses Gulp for project scaffolding.
-
-Slush does not contain anything "out of the box", except the ability to locate installed slush generators and to run them with liftoff.
-
-To find out more about Slush, check out the [documentation](https://github.com/klei/slush).
+Slush is a tool that uses Gulp for project scaffolding. To find out more about Slush, check out the [documentation](https://github.com/klei/slush).
 
 ## Contributing
 
 See the [CONTRIBUTING Guidelines](https://github.com/jonkemp/slush-webapp/blob/master/CONTRIBUTING.md)
-
-## Support
-If you have any problem or suggestion please open an issue [here](https://github.com/jonkemp/slush-webapp/issues).
 
 ## License 
 
