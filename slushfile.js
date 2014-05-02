@@ -12,6 +12,8 @@ var gulp = require('gulp'),
     install = require('gulp-install'),
     conflict = require('gulp-conflict'),
     template = require('gulp-template'),
+    rename = require('gulp-rename'),
+    _s = require('underscore.string'),
     inquirer = require('inquirer');
 
 gulp.task('default', function (done) {
@@ -32,8 +34,16 @@ gulp.task('default', function (done) {
             if (!answers.moveon) {
                 return done();
             }
+
+            answers.appNameSlug = _s.slugify(answers.appname);
+
             gulp.src(__dirname + '/templates/**')
                 .pipe(template(answers))
+                .pipe(rename(function(file) {
+                    if (file.basename[0] === '_') {
+                        file.basename = '.' + file.basename.slice(1);
+                    }
+                }))
                 .pipe(conflict('./'))
                 .pipe(gulp.dest('./'))
                 .pipe(install())
