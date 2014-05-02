@@ -33,7 +33,9 @@
     "gulp-template": "^0.1.1",
     "gulp-install": "^0.1.4",
     "gulp-conflict": "^0.1.1",
-    "inquirer": "^0.4.1"
+    "gulp-rename": "^1.2.0",
+    "inquirer": "^0.4.1",
+    "underscore.string": "^2.3.1"
   },
   "keywords": [
     "slushgenerator",
