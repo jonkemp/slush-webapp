@@ -1,7 +1,7 @@
 {
   "name": "slush-webapp",
   "description": "Scaffold out a front-end web app with Gulp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "homepage": "https://github.com/jonkemp/slush-webapp",
   "author": {
     "name": "Jonathan Kemp",
