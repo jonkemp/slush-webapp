@@ -1,18 +1,6 @@
 'use strict';
 
 var gulp = require('gulp'),
-    connect = require('connect'),
-    http = require('http'),
-    opn = require('opn'),
-    rimraf = require('rimraf'),
-    jshint = require('gulp-jshint'),
-    uglify = require('gulp-uglify'),<% if (includeSass) { %>
-    sass = require('gulp-sass'),
-    cssbeautify = require('gulp-cssbeautify'),<% } %>
-    minifycss = require('gulp-minify-css'),
-    useref = require('gulp-useref'),
-    filter = require('gulp-filter'),
-    livereload = require('gulp-livereload'),
     config = {
         app: 'app',
         dist: 'dist',
@@ -33,11 +21,12 @@ config.styles.apply(config);
 config.html.apply(config);
 
 gulp.task('clean', function(cb) {
-    rimraf(config.dist, cb);
+    require('rimraf')(config.dist, cb);
 });
 
 gulp.task('lint', function() {
-    var path = config.scripts();
+    var path = config.scripts(),
+        jshint = require('gulp-jshint');
 
     return gulp.src(path)
         .pipe(jshint())
@@ -45,7 +34,9 @@ gulp.task('lint', function() {
 });
 <% if (includeSass) { %>
 gulp.task('styles', function () {
-    var dir = config.styles();
+    var dir = config.styles(),
+        sass = require('gulp-sass'),
+        cssbeautify = require('gulp-cssbeautify');
 
     return gulp.src(dir + '/*.scss')
         .pipe(sass({
@@ -56,17 +47,18 @@ gulp.task('styles', function () {
 });<% } %>
 
 gulp.task('connect', function() {
+    var connect = require('connect');
     var app = connect()
         .use(require('connect-livereload')({ port: 35729 }))
         .use(connect.static(config.app))
         .use(connect.directory(config.app));
 
-    http.createServer(app)
+    require('http').createServer(app)
         .listen(config.port)
         .on('listening', function() {
             console.log('Started connect web server on http://localhost:' + config.port + '.');
 
-            opn('http://localhost:' + config.port);
+            require('opn')('http://localhost:' + config.port);
         });
 });
 
@@ -74,6 +66,7 @@ gulp.task('server', [<% if (includeSass) { %>'styles', <% } %>'connect'], functi
     var jsPath = config.scripts(),
         cssPath = config.styles(),
         htmlPath = config.html(),
+        livereload = require('gulp-livereload'),
         server = livereload();
     <% if (includeSass) { %>
     gulp.watch(cssPath + '/**/*.scss', ['styles']);<% } %>
@@ -103,9 +96,13 @@ gulp.task('misc', function(){
 });
 
 gulp.task('html', ['lint'<% if (includeSass) { %>, 'styles'<% } %>], function(){
-    var htmlPath = config.html();
-    var jsFilter = filter('**/*.js');
-    var cssFilter = filter('**/*.css');
+    var htmlPath = config.html(),
+        minifycss = require('gulp-minify-css'),
+        useref = require('gulp-useref'),
+        filter = require('gulp-filter'),
+        jsFilter = filter('**/*.js'),
+        cssFilter = filter('**/*.css'),
+        uglify = require('gulp-uglify');
 
     return gulp.src(htmlPath)
         .pipe(useref.assets())
