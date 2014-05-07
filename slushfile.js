@@ -64,6 +64,9 @@ gulp.task('default', function (done) {
                     if (file.basename[0] === '_') {
                         file.basename = '.' + file.basename.slice(1);
                     }
+                    if (answers.includeSass && file.extname === '.css') {
+                        file.extname = '.scss';
+                    }
                 }))
                 .pipe(conflict('./'))
                 .pipe(gulp.dest('./'))
