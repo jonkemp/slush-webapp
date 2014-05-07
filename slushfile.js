@@ -23,18 +23,20 @@ gulp.task('default', function (done) {
                 name: 'appname',
                 message: 'Give your app a name',
                 default: gulp.args.join(' ')
-            },
-            {
+            }, {
                 type: 'checkbox',
                 name: 'features',
                 message: 'Which other options would you like to include?',
                 choices: [{
+                    name: 'Sass',
+                    value: 'includeSass',
+                    checked: true
+                }, {
                     name: 'Modernizr',
                     value: 'includeModernizr',
                     checked: true
                 }]
-            },
-            {
+            }, {
                 type: 'confirm',
                 name: 'moveon',
                 message: 'Continue?'
@@ -47,6 +49,7 @@ gulp.task('default', function (done) {
                 return features.indexOf(feat) !== -1;
             };
 
+            answers.includeSass = hasFeature('includeSass');
             answers.includeModernizr = hasFeature('includeModernizr');
 
             if (!answers.moveon) {

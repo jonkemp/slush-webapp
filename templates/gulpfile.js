@@ -6,9 +6,9 @@ var gulp = require('gulp'),
     opn = require('opn'),
     rimraf = require('rimraf'),
     jshint = require('gulp-jshint'),
-    uglify = require('gulp-uglify'),
+    uglify = require('gulp-uglify'),<% if (includeSass) { %>
     sass = require('gulp-sass'),
-    cssbeautify = require('gulp-cssbeautify'),
+    cssbeautify = require('gulp-cssbeautify'),<% } %>
     minifycss = require('gulp-minify-css'),
     useref = require('gulp-useref'),
     filter = require('gulp-filter'),
@@ -44,14 +44,15 @@ gulp.task('lint', function() {
         .pipe(jshint.reporter('default'));
 });
 
-gulp.task('sass', function () {
+gulp.task('styles', function () {
     var dir = config.styles();
-
+    <% if (includeSass) { %>
     return gulp.src(dir + '/*.scss')
         .pipe(sass({
             outputStyle: 'expanded'
         }))
-        .pipe(cssbeautify())
+        .pipe(cssbeautify())<% } else { %>
+    return gulp.src(dir + '/*.css')<% } %>
         .pipe(gulp.dest(dir));
 });
 
@@ -70,15 +71,15 @@ gulp.task('connect', function() {
         });
 });
 
-gulp.task('server', ['sass', 'connect'], function() {
+gulp.task('server', [<% if (includeSass) { %>'styles', <% } %>'connect'], function() {
     var jsPath = config.scripts(),
         cssPath = config.styles(),
         htmlPath = config.html(),
         server = livereload();
+    <% if (includeSass) { %>
+    gulp.watch(cssPath + '/**/*.scss', ['styles']);<% } %>
 
-    gulp.watch(cssPath + '/**/*.scss', ['sass']);
-
-    gulp.watch([cssPath + '/**/*.scss', jsPath, htmlPath]).on('change', function (file) {
+    gulp.watch([cssPath + '/**/*.<%= includeSass ? 'scss' : 'css' %>', jsPath, htmlPath]).on('change', function (file) {
         server.changed(file.path);
     });
 });
@@ -102,7 +103,7 @@ gulp.task('misc', function(){
         .pipe(gulp.dest(config.dist));
 });
 
-gulp.task('html', ['lint', 'sass'], function(){
+gulp.task('html', ['lint'<% if (includeSass) { %>, 'styles'<% } %>], function(){
     var htmlPath = config.html();
     var jsFilter = filter('**/*.js');
     var cssFilter = filter('**/*.css');
