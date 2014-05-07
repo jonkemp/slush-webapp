@@ -19,18 +19,36 @@ var gulp = require('gulp'),
 gulp.task('default', function (done) {
     inquirer.prompt([
             {
-                // Get app name from arguments by default
                 type: 'input',
                 name: 'appname',
                 message: 'Give your app a name',
                 default: gulp.args.join(' ')
             },
             {
+                type: 'checkbox',
+                name: 'features',
+                message: 'Which other options would you like to include?',
+                choices: [{
+                    name: 'Modernizr',
+                    value: 'includeModernizr',
+                    checked: true
+                }]
+            },
+            {
                 type: 'confirm',
                 name: 'moveon',
-                message: 'Continue?'}
+                message: 'Continue?'
+            }
         ],
         function (answers) {
+            var features = answers.features;
+
+            var hasFeature = function (feat) {
+                return features.indexOf(feat) !== -1;
+            };
+
+            answers.includeModernizr = hasFeature('includeModernizr');
+
             if (!answers.moveon) {
                 return done();
             }
