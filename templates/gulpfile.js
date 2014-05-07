@@ -43,18 +43,17 @@ gulp.task('lint', function() {
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
-
+<% if (includeSass) { %>
 gulp.task('styles', function () {
     var dir = config.styles();
-    <% if (includeSass) { %>
+
     return gulp.src(dir + '/*.scss')
         .pipe(sass({
             outputStyle: 'expanded'
         }))
-        .pipe(cssbeautify())<% } else { %>
-    return gulp.src(dir + '/*.css')<% } %>
+        .pipe(cssbeautify())
         .pipe(gulp.dest(dir));
-});
+});<% } %>
 
 gulp.task('connect', function() {
     var app = connect()
