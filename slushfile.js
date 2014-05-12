@@ -32,6 +32,10 @@ gulp.task('default', function (done) {
                     value: 'includeSass',
                     checked: true
                 }, {
+                    name: 'Bootstrap',
+                    value: 'includeBootstrap',
+                    checked: true
+                }, {
                     name: 'Modernizr',
                     value: 'includeModernizr',
                     checked: true
@@ -50,6 +54,7 @@ gulp.task('default', function (done) {
             };
 
             answers.includeSass = hasFeature('includeSass');
+            answers.includeBootstrap = hasFeature('includeBootstrap');
             answers.includeModernizr = hasFeature('includeModernizr');
 
             if (!answers.moveon) {
@@ -70,9 +75,6 @@ gulp.task('default', function (done) {
                 }))
                 .pipe(conflict('./'))
                 .pipe(gulp.dest('./'))
-                .pipe(install())
-                .on('end', function () {
-                    done();
-                });
+                .pipe(install());
         });
 });

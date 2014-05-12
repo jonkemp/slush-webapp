@@ -1,10 +1,12 @@
 {
   "name": "<%= appNameSlug %>",
   "private": true,
-  "dependencies": {
-    "jquery": "~1.11.0",<% if (includeModernizr) { %>
-    "modernizr": "~2.8.1",<% } %>
-    "normalize-css": "~3.0.1"
+  "dependencies": {<% if (includeBootstrap) { if (includeSass) { %>
+    "bootstrap-sass-official": "~3.1.1",<% } else { %>
+    "bootstrap": "~3.1.1",<% }} else { %>
+    "normalize-css": "~3.0.1",<% } %>
+    "jquery": "~1.11.0"<% if (includeModernizr) { %>,
+    "modernizr": "~2.8.1"<% } %>
   },
   "devDependencies": {}
 }

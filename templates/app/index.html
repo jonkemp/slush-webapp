@@ -9,8 +9,14 @@
 
     <!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
 
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css --><% if (includeBootstrap && !includeSass) { %>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"><% } %><% if (!includeBootstrap) { %>
+    <link rel="stylesheet" href="bower_components/normalize-css/normalize.css"><% } %>
+    <!-- endbower -->
+    <!-- endbuild -->
+
     <!-- build:css styles/main.css -->
-    <link rel="stylesheet" href="bower_components/normalize-css/normalize.css">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <% if (includeModernizr) { %>
@@ -23,11 +29,73 @@
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <p>Hello world! This is HTML5 Boilerplate.</p>
+    <% if (includeBootstrap) { %>
+    <div class="container">
+        <div class="header">
+            <ul class="nav nav-pills pull-right">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <h3 class="text-muted"><%= appname %></h3>
+        </div>
+
+        <div class="jumbotron">
+            <h1>Hello!</h1>
+            <p class="lead">Your app is ready.</p>
+            <p><a class="btn btn-lg btn-success" href="#">Great!</a></p>
+        </div>
+
+        <div class="row marketing">
+            <div class="col-lg-6">
+                <h4>HTML5 Boilerplate</h4>
+                <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
+                <% if (includeSass) { %>
+                <h4>Sass</h4>
+                <p>Sass is the most mature, stable, and powerful professional grade CSS extension language in the world.</p>
+                <% } %>
+                <h4>Bootstrap</h4>
+                <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p><% if (includeModernizr) { %>
+                <h4>Modernizr</h4>
+                <p>Modernizr is an open-source JavaScript library that helps you build the next generation of HTML5 and CSS3-powered websites.</p>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Slush - The streaming scaffolding system.</p>
+        </div>
+
+    </div>
+    <% } else { %>
+    <div class="hero-unit">
+        <h1>Hello!</h1>
+        <p>You now have</p>
+        <ul>
+            <li>HTML5 Boilerplate</li><% if (includeSass) { %>
+            <li>Sass</li><% } %><% if (includeModernizr) { %>
+            <li>Modernizr</li><% } %>
+        </ul>
+    </div>
+    <% } %>
 
     <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <% if (includeBootstrap) { %>
+    <script src="<% if (includeSass) { %>bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/<% } else { %>bower_components/bootstrap/js/<% } %>affix.js"></script>
+    <script src="<% if (includeSass) { %>bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/<% } else { %>bower_components/bootstrap/js/<% } %>alert.js"></script>
+    <script src="<% if (includeSass) { %>bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/<% } else { %>bower_components/bootstrap/js/<% } %>dropdown.js"></script>
+    <script src="<% if (includeSass) { %>bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/<% } else { %>bower_components/bootstrap/js/<% } %>tooltip.js"></script>
+    <script src="<% if (includeSass) { %>bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/<% } else { %>bower_components/bootstrap/js/<% } %>modal.js"></script>
+    <script src="<% if (includeSass) { %>bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/<% } else { %>bower_components/bootstrap/js/<% } %>transition.js"></script>
+    <script src="<% if (includeSass) { %>bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/<% } else { %>bower_components/bootstrap/js/<% } %>button.js"></script>
+    <script src="<% if (includeSass) { %>bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/<% } else { %>bower_components/bootstrap/js/<% } %>popover.js"></script>
+    <script src="<% if (includeSass) { %>bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/<% } else { %>bower_components/bootstrap/js/<% } %>carousel.js"></script>
+    <script src="<% if (includeSass) { %>bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/<% } else { %>bower_components/bootstrap/js/<% } %>scrollspy.js"></script>
+    <script src="<% if (includeSass) { %>bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/<% } else { %>bower_components/bootstrap/js/<% } %>collapse.js"></script>
+    <script src="<% if (includeSass) { %>bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/<% } else { %>bower_components/bootstrap/js/<% } %>tab.js"></script><% } %>
+    <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js scripts/main.js -->
