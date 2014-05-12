@@ -30,10 +30,10 @@
   },
   "dependencies": {
     "gulp": "^3.6.2",
-    "gulp-template": "^0.1.1",
-    "gulp-install": "^0.1.4",
     "gulp-conflict": "^0.1.1",
+    "gulp-install": "^0.1.4",
     "gulp-rename": "^1.2.0",
+    "gulp-template": "^0.1.1",
     "inquirer": "^0.4.1",
     "underscore.string": "^2.3.1"
   },
