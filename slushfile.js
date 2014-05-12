@@ -9,12 +9,15 @@
 'use strict';
 
 var gulp = require('gulp'),
+    gutil = require('gulp-util'),
     install = require('gulp-install'),
     conflict = require('gulp-conflict'),
     template = require('gulp-template'),
     rename = require('gulp-rename'),
     _s = require('underscore.string'),
-    inquirer = require('inquirer');
+    inquirer = require('inquirer'),
+    fs = require('fs'),
+    wiredep = require('wiredep');
 
 gulp.task('default', function (done) {
     inquirer.prompt([
@@ -76,5 +79,31 @@ gulp.task('default', function (done) {
                 .pipe(conflict('./'))
                 .pipe(gulp.dest('./'))
                 .pipe(install());
+
+            process.on('exit', function () {
+                var bowerJson = JSON.parse(fs.readFileSync('./bower.json'));
+
+                // wire Bower packages to .html
+                wiredep({
+                    bowerJson: bowerJson,
+                    directory: 'app/bower_components',
+                    src: 'app/index.html'
+                });
+
+                if (answers.includeSass) {
+                    // wire Bower packages to .scss
+                    wiredep({
+                        bowerJson: bowerJson,
+                        directory: 'app/bower_components',
+                        src: 'app/styles/*.scss'
+                    });
+                }
+
+                gutil.log('After running `npm install & bower install`, inject your front end dependencies into');
+                gutil.log('your HTML by running:');
+                gutil.log('  gulp wiredep');
+
+                done();
+            });
         });
 });

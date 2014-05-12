@@ -46,6 +46,22 @@ gulp.task('styles', function () {
         .pipe(gulp.dest(dir));
 });<% } %>
 
+gulp.task('wiredep', function () {
+    var wiredep = require('wiredep').stream;
+<% if (includeSass) { %>
+    gulp.src('app/styles/*.scss')
+        .pipe(wiredep({
+            directory: 'app/bower_components'
+        }))
+        .pipe(gulp.dest('app/styles'));
+<% } %>
+    gulp.src('app/*.html')
+        .pipe(wiredep({
+            directory: 'app/bower_components'
+        }))
+        .pipe(gulp.dest('app'));
+});
+
 gulp.task('connect', function() {
     var connect = require('connect');
     var app = connect()
@@ -74,6 +90,8 @@ gulp.task('server', [<% if (includeSass) { %>'styles', <% } %>'connect'], functi
     gulp.watch([cssPath + '/**/*.<%= includeSass ? 'scss' : 'css' %>', jsPath, htmlPath]).on('change', function (file) {
         server.changed(file.path);
     });
+
+    gulp.watch('bower.json', ['wiredep']);
 });
 
 gulp.task('images', function(){
