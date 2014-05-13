@@ -73,8 +73,6 @@ gulp.task('connect', function() {
         .listen(config.port)
         .on('listening', function() {
             console.log('Started connect web server on http://localhost:' + config.port + '.');
-
-            require('opn')('http://localhost:' + config.port);
         });
 });
 
@@ -84,6 +82,8 @@ gulp.task('server', [<% if (includeSass) { %>'styles', <% } %>'connect'], functi
         htmlPath = config.html(),
         livereload = require('gulp-livereload'),
         server = livereload();
+
+    require('opn')('http://localhost:' + config.port);
     <% if (includeSass) { %>
     gulp.watch(cssPath + '/**/*.scss', ['styles']);<% } %>
 
