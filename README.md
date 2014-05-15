@@ -4,13 +4,13 @@
 
 ## Features
 
-Includes:
+### Includes:
 * HTML5 Boilerplate
 * jQuery
 * Modernizr
 * Bootstrap
 
-What you can do:
+### What you can do:
 * Watch and compile Sass files automatically
 * Automatically wire-up dependencies installed with Bower
 * Start a server to preview your code with LiveReload
