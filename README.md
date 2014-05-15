@@ -2,6 +2,20 @@
 
 > Easily scaffold out a front-end web app with [Gulp](https://github.com/gulpjs/gulp)
 
+## Features
+
+Includes:
+* HTML5 Boilerplate
+* jQuery
+* Modernizr
+* Bootstrap
+
+What you can do:
+* Watch and compile Sass files automatically
+* Automatically wire-up dependencies installed with Bower
+* Start a server to preview your code with LiveReload
+* Automatically lint your scripts
+* Concatenate and minify CSS and JavaScript files
 
 ## Getting Started
 
