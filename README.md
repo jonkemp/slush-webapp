@@ -17,6 +17,10 @@ What you can do:
 * Automatically lint your scripts
 * Concatenate and minify CSS and JavaScript files
 
+For more information on what this generator can do for you, take a look at the [gulp plugins](https://github.com/jonkemp/slush-webapp/blob/master/templates/package.json) used in the `package.json`.
+
+Please see the [gulpfile.js](https://github.com/jonkemp/slush-webapp/blob/master/templates/gulpfile.js) for up to date information on what is supported.
+
 ## Getting Started
 
 ### Installation
