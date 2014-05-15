@@ -1,5 +1,12 @@
 # slush-webapp changelog
 
+# 0.4.0
+
+- Add --skip-install option to skip npm and bower install.
+- Add more files from HTML5 Boilerplate.
+- Update documentation.
+- Bug fixes.
+
 # 0.3.0
 
 - Add support for wiredep.
