@@ -93,25 +93,25 @@ project:
 
    ```bash
    # Clone your fork of the repo into the current directory
-   git clone https://github.com/<your-username>/slush-webapp
+   $ git clone https://github.com/<your-username>/slush-webapp
    # Navigate to the newly cloned directory
-   cd slush-webapp
+   $ cd slush-webapp
    # Assign the original repo to a remote called "upstream"
-   git remote add upstream https://github.com/jonkemp/slush-webapp
+   $ git remote add upstream https://github.com/jonkemp/slush-webapp
    ```
 
 2. If you cloned a while ago, get the latest changes from upstream:
 
    ```bash
-   git checkout <dev-branch>
-   git pull upstream <dev-branch>
+   $ git checkout <dev-branch>
+   $ git pull upstream <dev-branch>
    ```
 
 3. Create a new topic branch (off the main project development branch) to
    contain your feature, change, or fix:
 
    ```bash
-   git checkout -b <topic-branch-name>
+   $ git checkout -b <topic-branch-name>
    ```
 
 4. Commit your changes in logical chunks. Please adhere to these [git commit
@@ -123,13 +123,13 @@ project:
 5. Locally merge (or rebase) the upstream development branch into your topic branch:
 
    ```bash
-   git pull [--rebase] upstream <dev-branch>
+   $ git pull [--rebase] upstream <dev-branch>
    ```
 
 6. Push your topic branch up to your fork:
 
    ```bash
-   git push origin <topic-branch-name>
+   $ git push origin <topic-branch-name>
    ```
 
 7. [Open a Pull Request](https://help.github.com/articles/using-pull-requests/)
@@ -140,55 +140,55 @@ project:
 Addding files on repo
 
 ```bash
-git commit -m "Add filename"
+$ git commit -m "Add filename"
 ```
 
 Updating files on repo
 
 ```bash
-git commit -m "Update filename, filename2, filename3"
+$ git commit -m "Update filename, filename2, filename3"
 ```
 
 Removing files on repo
 
 ```bash
-git commit -m "Remove filename"
+$ git commit -m "Remove filename"
 ```
 
 Renaming files on repo
 
 ```bash
-git commit -m "Rename filename"
+$ git commit -m "Rename filename"
 ```
 
 Fixing errors and issues on repo
 
 ```bash
-git commit -m "Fixed #issuenumber Message about this fix"
+$ git commit -m "Fixed #issuenumber Message about this fix"
 ```
 
 Adding features on repo
 
 ```bash
-git commit -m "Add Feature: nameoffeature Message about this feature"
+$ git commit -m "Add Feature: nameoffeature Message about this feature"
 ```
 
 Updating features on repo
 
 ```bash
-git commit -m "Update Feature: nameoffeature Message about this update"
+$ git commit -m "Update Feature: nameoffeature Message about this update"
 ```
 
 Removing features on repo
 
 ```bash
-git commit -m "Remove Feature: nameoffeature Message about this"
+$ git commit -m "Remove Feature: nameoffeature Message about this"
 ```
 
 Ignoring Travis CI build on repo
 
 ```bash
-git commit -m "Commit message here [ci-skip]"
+$ git commit -m "Commit message here [ci-skip]"
 ```
 
 **IMPORTANT**: By submitting a patch, you agree to allow the project owner to
