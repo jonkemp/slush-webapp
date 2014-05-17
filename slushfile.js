@@ -17,9 +17,13 @@ var gulp = require('gulp'),
     _s = require('underscore.string'),
     inquirer = require('inquirer'),
     fs = require('fs'),
+    path = require('path'),
     wiredep = require('wiredep');
 
 gulp.task('default', function (done) {
+
+    gutil.log('Out of the box you get HTML5 Boilerplate and jQuery to build your app.');
+
     inquirer.prompt([
         {
             type: 'checkbox',
@@ -45,21 +49,34 @@ gulp.task('default', function (done) {
         }
     ],
     function (answers) {
-        var features = answers.features;
-
-        var hasFeature = function (feat) {
-            return features.indexOf(feat) !== -1;
-        };
-
-        answers.includeSass = hasFeature('includeSass');
-        answers.includeBootstrap = hasFeature('includeBootstrap');
-        answers.includeModernizr = hasFeature('includeModernizr');
+        var appname,
+            features = answers.features,
+            hasFeature = function (feat) {
+                return features.indexOf(feat) !== -1;
+            };
 
         if (!answers.moveon) {
             return done();
         }
 
+        try {
+            appname = require(path.join(process.cwd(), 'bower.json')).name;
+        } catch (e) {
+            try {
+                appname = require(path.join(process.cwd(), 'package.json')).name;
+            } catch (e) {}
+        }
+
+        if (!appname) {
+            appname = path.basename(process.cwd());
+        }
+
+        answers.appname = appname.replace(/[^\w\s]+?/g, ' ');
         answers.appNameSlug = _s.slugify(answers.appname);
+
+        answers.includeSass = hasFeature('includeSass');
+        answers.includeBootstrap = hasFeature('includeBootstrap');
+        answers.includeModernizr = hasFeature('includeModernizr');
 
         gulp.src(__dirname + '/templates/**')
             .pipe(template(answers))
