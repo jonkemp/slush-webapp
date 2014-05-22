@@ -1,4 +1,4 @@
-# [slush](https://github.com/klei/slush)-webapp [![Build Status](https://secure.travis-ci.org/jonkemp/slush-webapp.png?branch=master)](https://travis-ci.org/jonkemp/slush-webapp)
+# [slush](https://github.com/slushjs/slush)-webapp [![Build Status](https://secure.travis-ci.org/jonkemp/slush-webapp.png?branch=master)](https://travis-ci.org/jonkemp/slush-webapp)
 
 > Easily scaffold out a front-end web app with [Gulp](https://github.com/gulpjs/gulp)
 
@@ -56,7 +56,7 @@ $ cd my-slush-webapp && slush webapp
 
 ## Getting To Know Slush
 
-Slush is a tool that uses Gulp for project scaffolding. To find out more about Slush, check out the [documentation](https://github.com/klei/slush).
+Slush is a tool that uses Gulp for project scaffolding. To find out more about Slush, check out the [documentation](https://github.com/slushjs/slush).
 
 ## Contributing
 
