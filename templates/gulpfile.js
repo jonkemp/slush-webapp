@@ -117,19 +117,13 @@ gulp.task('html', ['lint'<% if (includeSass) { %>, 'styles'<% } %>], function(){
     var htmlPath = config.html(),
         minifycss = require('gulp-minify-css'),
         useref = require('gulp-useref'),
-        filter = require('gulp-filter'),
-        jsFilter = filter('**/*.js'),
-        cssFilter = filter('**/*.css'),
+        gulpif = require('gulp-if'),
         uglify = require('gulp-uglify');
 
     return gulp.src(htmlPath)
         .pipe(useref.assets())
-        .pipe(jsFilter)
-        .pipe(uglify())
-        .pipe(jsFilter.restore())
-        .pipe(cssFilter)
-        .pipe(minifycss())
-        .pipe(cssFilter.restore())
+        .pipe(gulpif('*.js', uglify()))
+        .pipe(gulpif('*.css', minifycss()))
         .pipe(useref.restore())
         .pipe(useref())
         .pipe(gulp.dest(config.dist));
