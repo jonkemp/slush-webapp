@@ -1,7 +1,7 @@
 {
   "name": "slush-webapp",
-  "description": "Scaffold out a front-end web app with Gulp",
-  "version": "0.4.0",
+  "description": "Generator for HTML5 Boilerplate and Bootstrap web apps using Gulp",
+  "version": "0.4.1",
   "homepage": "https://github.com/jonkemp/slush-webapp",
   "author": {
     "name": "Jonathan Kemp",
@@ -35,7 +35,7 @@
     "gulp-rename": "^1.2.0",
     "gulp-template": "^0.1.1",
     "gulp-util": "^2.2.14",
-    "inquirer": "^0.4.1",
+    "inquirer": "^0.5.1",
     "underscore.string": "^2.3.1",
     "wiredep": "^1.4.4"
   },
