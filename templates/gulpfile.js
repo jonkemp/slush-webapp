@@ -20,11 +20,11 @@ config.scripts.apply(config);
 config.styles.apply(config);
 config.html.apply(config);
 
-gulp.task('clean', function(cb) {
+gulp.task('clean', function (cb) {
     require('rimraf')(config.dist, cb);
 });
 
-gulp.task('lint', function() {
+gulp.task('lint', function () {
     var path = config.scripts(),
         jshint = require('gulp-jshint');
 
@@ -62,7 +62,7 @@ gulp.task('wiredep', function () {
         .pipe(gulp.dest('app'));
 });
 
-gulp.task('connect', function() {
+gulp.task('connect', function () {
     var connect = require('connect');
     var app = connect()
         .use(require('connect-livereload')({ port: 35729 }))
@@ -76,7 +76,7 @@ gulp.task('connect', function() {
         });
 });
 
-gulp.task('server', [<% if (includeSass) { %>'styles', <% } %>'connect'], function() {
+gulp.task('server', [<% if (includeSass) { %>'styles', <% } %>'connect'], function () {
     var jsPath = config.scripts(),
         cssPath = config.styles(),
         htmlPath = config.html(),
@@ -94,26 +94,26 @@ gulp.task('server', [<% if (includeSass) { %>'styles', <% } %>'connect'], functi
     gulp.watch('bower.json', ['wiredep']);
 });
 
-gulp.task('images', function(){
+gulp.task('images', function () {
     return gulp.src(config.app + '/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}')
         .pipe(gulp.dest(config.dist + '/images'));
 });
 
-gulp.task('fonts', function(){
+gulp.task('fonts', function () {
     var cssPath = config.styles();
 
     return gulp.src(cssPath + '/fonts/*')
         .pipe(gulp.dest(config.dist + '/styles/fonts'));
 });
 
-gulp.task('misc', function(){
+gulp.task('misc', function () {
     return gulp.src([
             config.app + '/*.{ico,png,txt}'
         ])
         .pipe(gulp.dest(config.dist));
 });
 
-gulp.task('html', ['lint'<% if (includeSass) { %>, 'styles'<% } %>], function(){
+gulp.task('html', ['lint'<% if (includeSass) { %>, 'styles'<% } %>], function () {
     var htmlPath = config.html(),
         minifycss = require('gulp-minify-css'),
         useref = require('gulp-useref'),
@@ -129,7 +129,7 @@ gulp.task('html', ['lint'<% if (includeSass) { %>, 'styles'<% } %>], function(){
         .pipe(gulp.dest(config.dist));
 });
 
-gulp.task('build', ['clean'], function(){
+gulp.task('build', ['clean'], function () {
     gulp.start('images', 'fonts', 'misc', 'html');
 });
 
