@@ -26,10 +26,10 @@
     "npm": ">=1.4.3"
   },
   "scripts": {
-    "test": "echo \"No tests\""
+    "test": "mocha"
   },
   "dependencies": {
-    "gulp": "^3.6.2",
+    "gulp": "^3.8.0",
     "gulp-conflict": "^0.1.1",
     "gulp-install": "^0.1.4",
     "gulp-rename": "^1.2.0",
@@ -37,7 +37,12 @@
     "gulp-util": "^2.2.14",
     "inquirer": "^0.5.1",
     "underscore.string": "^2.3.1",
-    "wiredep": "^1.4.4"
+    "wiredep": "^1.7.3"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "mock-gulp-dest": "^0.1.0",
+    "should": "*"
   },
   "keywords": [
     "slushgenerator",
