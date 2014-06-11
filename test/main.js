@@ -59,5 +59,44 @@ describe('slush-webapp', function() {
                 done();
             });
         });
+
+        it('should add dot files to project root', function (done) {
+            gulp.start('default').once('stop', function () {
+                mockGulpDest.assertDestContains([
+                    '.bowerrc',
+                    '.editorconfig',
+                    '.gitattributes',
+                    '.gitignore',
+                    '.jshintrc'
+                ]);
+
+                done();
+            });
+        });
+
+        it('should add bower.json and package.json to project root', function (done) {
+            gulp.start('default').once('stop', function () {
+                mockGulpDest.assertDestContains([
+                    'package.json',
+                    'bower.json'
+                ]);
+
+                done();
+            });
+        });
+
+        it('should add a gulpfile to project root', function (done) {
+            gulp.start('default').once('stop', function () {
+                mockGulpDest.assertDestContains('gulpfile.js');
+                done();
+            });
+        });
+
+        it('should add an index.html to the app folder', function (done) {
+            gulp.start('default').once('stop', function () {
+                mockGulpDest.assertDestContains('app/index.html');
+                done();
+            });
+        });
     });
 });
