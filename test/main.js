@@ -35,19 +35,7 @@ describe('slush-webapp', function() {
     describe('default generator', function () {
         beforeEach(function () {
             mockPrompt({
-                features: [{
-                    name: 'Sass',
-                    value: 'includeSass',
-                    checked: false
-                }, {
-                    name: 'Bootstrap',
-                    value: 'includeBootstrap',
-                    checked: false
-                }, {
-                    name: 'Modernizr',
-                    value: 'includeModernizr',
-                    checked: false
-                }],
+                features: [],
                 moveon: true
             });
         });
@@ -60,41 +48,50 @@ describe('slush-webapp', function() {
             });
         });
 
-        it('should add dot files to project root', function (done) {
+        it('should create expected files', function (done) {
             gulp.start('default').once('stop', function () {
                 mockGulpDest.assertDestContains([
                     '.bowerrc',
                     '.editorconfig',
                     '.gitattributes',
                     '.gitignore',
-                    '.jshintrc'
-                ]);
-
-                done();
-            });
-        });
-
-        it('should add bower.json and package.json to project root', function (done) {
-            gulp.start('default').once('stop', function () {
-                mockGulpDest.assertDestContains([
+                    '.jshintrc',
                     'package.json',
-                    'bower.json'
+                    'bower.json',
+                    'gulpfile.js',
+                    'app/404.html',
+                    'app/favicon.ico',
+                    'app/robots.txt',
+                    'app/index.html',
+                    'app/scripts/main.js'
                 ]);
 
                 done();
             });
         });
+    });
 
-        it('should add a gulpfile to project root', function (done) {
+    describe('default generator: sass feature', function () {
+        it('should create css file', function (done) {
+            mockPrompt({
+                features: [],
+                moveon: true
+            });
             gulp.start('default').once('stop', function () {
-                mockGulpDest.assertDestContains('gulpfile.js');
+                mockGulpDest.assertDestContains('app/styles/main.css');
+                mockGulpDest.assertDestNotContains('app/styles/main.scss');
                 done();
             });
         });
 
-        it('should add an index.html to the app folder', function (done) {
+        it('should create scss file', function (done) {
+            mockPrompt({
+                features: ['includeSass'],
+                moveon: true
+            });
             gulp.start('default').once('stop', function () {
-                mockGulpDest.assertDestContains('app/index.html');
+                mockGulpDest.assertDestNotContains('app/styles/main.css');
+                mockGulpDest.assertDestContains('app/styles/main.scss');
                 done();
             });
         });
