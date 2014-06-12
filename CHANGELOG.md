@@ -1,5 +1,17 @@
 # slush-webapp changelog
 
+# 0.4.2
+
+- Add tests.
+- Various fixes in slushfile.js.
+- Fix formatting issues in gulpfile.js.
+
+# 0.4.1
+
+- Determine the name of the app automatically.
+- Use appNameSlug in index.html.
+- Use gulp-if to make the html task less verbose.
+
 # 0.4.0
 
 - Add --skip-install option to skip npm and bower install.
