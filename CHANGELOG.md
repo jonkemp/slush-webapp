@@ -1,16 +1,14 @@
 # slush-webapp changelog
 
-# 0.4.2
+# 0.5.0
 
 - Add tests.
 - Various fixes in slushfile.js.
 - Fix formatting issues in gulpfile.js.
-
-# 0.4.1
-
 - Determine the name of the app automatically.
 - Use appNameSlug in index.html.
-- Use gulp-if to make the html task less verbose.
+- Use gulp-if to make the html task less verbose in gulpfile.js.
+- Update devDependencies for default webapp.
 
 # 0.4.0
 
