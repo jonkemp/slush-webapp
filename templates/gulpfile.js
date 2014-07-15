@@ -1,49 +1,29 @@
 'use strict';
 
-var gulp = require('gulp'),
-    config = {
-        app: 'app',
-        dist: 'dist',
-        port: 9000,
-        scripts: function () {
-            return this.app + '/scripts/*.js';
-        },
-        styles: function () {
-            return this.app + '/styles';
-        },
-        html: function () {
-            return this.app + '/*.html';
-        }
-    };
-
-config.scripts.apply(config);
-config.styles.apply(config);
-config.html.apply(config);
+var gulp = require('gulp');
 
 gulp.task('clean', function (cb) {
-    require('rimraf')(config.dist, cb);
+    require('rimraf')('dist', cb);
 });
 
 gulp.task('lint', function () {
-    var path = config.scripts(),
-        jshint = require('gulp-jshint');
+    var jshint = require('gulp-jshint');
 
-    return gulp.src(path)
+    return gulp.src('app/scripts/**/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
 <% if (includeSass) { %>
 gulp.task('styles', function () {
-    var dir = config.styles(),
-        sass = require('gulp-sass'),
+    var sass = require('gulp-sass'),
         cssbeautify = require('gulp-cssbeautify');
 
-    return gulp.src(dir + '/*.scss')
+    return gulp.src('app/styles/*.scss')
         .pipe(sass({
             outputStyle: 'expanded'
         }))
         .pipe(cssbeautify())
-        .pipe(gulp.dest(dir));
+        .pipe(gulp.dest('app/styles'));
 });<% } %>
 
 gulp.task('wiredep', function () {
@@ -66,28 +46,25 @@ gulp.task('connect', function () {
     var connect = require('connect');
     var app = connect()
         .use(require('connect-livereload')({ port: 35729 }))
-        .use(connect.static(config.app))
-        .use(connect.directory(config.app));
+        .use(connect.static('app'))
+        .use(connect.directory('app'));
 
     require('http').createServer(app)
-        .listen(config.port)
+        .listen(9000)
         .on('listening', function() {
-            console.log('Started connect web server on http://localhost:' + config.port + '.');
+            console.log('Started connect web server on http://localhost:9000.');
         });
 });
 
 gulp.task('server', [<% if (includeSass) { %>'styles', <% } %>'connect'], function () {
-    var jsPath = config.scripts(),
-        cssPath = config.styles(),
-        htmlPath = config.html(),
-        livereload = require('gulp-livereload'),
+    var livereload = require('gulp-livereload'),
         server = livereload();
 
-    require('opn')('http://localhost:' + config.port);
+    require('opn')('http://localhost:9000');
     <% if (includeSass) { %>
-    gulp.watch(cssPath + '/**/*.scss', ['styles']);<% } %>
+    gulp.watch('app/styles/**/*.scss', ['styles']);<% } %>
 
-    gulp.watch([cssPath + '/**/*.<%= includeSass ? 'scss' : 'css' %>', jsPath, htmlPath]).on('change', function (file) {
+    gulp.watch(['app/styles/**/*.<%= includeSass ? 'scss' : 'css' %>', 'app/scripts/**/*.js', 'app/*.html']).on('change', function (file) {
         server.changed(file.path);
     });
 
@@ -95,38 +72,35 @@ gulp.task('server', [<% if (includeSass) { %>'styles', <% } %>'connect'], functi
 });
 
 gulp.task('images', function () {
-    return gulp.src(config.app + '/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}')
-        .pipe(gulp.dest(config.dist + '/images'));
+    return gulp.src('app/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}')
+        .pipe(gulp.dest('dist/images'));
 });
 
 gulp.task('fonts', function () {
-    var cssPath = config.styles();
-
-    return gulp.src(cssPath + '/fonts/*')
-        .pipe(gulp.dest(config.dist + '/styles/fonts'));
+    return gulp.src('app/styles/fonts/*')
+        .pipe(gulp.dest('dist/styles/fonts'));
 });
 
 gulp.task('misc', function () {
     return gulp.src([
             config.app + '/*.{ico,png,txt}'
         ])
-        .pipe(gulp.dest(config.dist));
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('html', ['lint'<% if (includeSass) { %>, 'styles'<% } %>], function () {
-    var htmlPath = config.html(),
-        minifycss = require('gulp-minify-css'),
+    var minifycss = require('gulp-minify-css'),
         useref = require('gulp-useref'),
         gulpif = require('gulp-if'),
         uglify = require('gulp-uglify');
 
-    return gulp.src(htmlPath)
+    return gulp.src('app/*.html')
         .pipe(useref.assets())
         .pipe(gulpif('*.js', uglify()))
         .pipe(gulpif('*.css', minifycss()))
         .pipe(useref.restore())
         .pipe(useref())
-        .pipe(gulp.dest(config.dist));
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('build', ['clean'], function () {
