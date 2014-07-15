@@ -49,6 +49,8 @@ Run the generator from within the new folder:
 $ cd my-slush-webapp && slush webapp
 ```
 
+You can use Gulp to preview your app by running `gulp serve`. This task will also reload watched files instantly with livereload. To see what else you can do with Gulp, check out the [gulpfile.js](https://github.com/jonkemp/slush-webapp/blob/master/templates/gulpfile.js).
+
 ## Options
 
 - `--skip-install`
