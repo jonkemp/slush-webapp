@@ -51,16 +51,17 @@ gulp.task('misc', function () {
 });
 
 gulp.task('html'<% if (includeSass) { %>, ['styles']<% } %>, function () {
-    var minifycss = require('gulp-minify-css'),
+    var uglify = require('gulp-uglify'),
+        minifyCss = require('gulp-minify-css'),
         useref = require('gulp-useref'),
         gulpif = require('gulp-if'),
-        uglify = require('gulp-uglify');
+        assets = useref.assets();
 
     return gulp.src('app/*.html')
-        .pipe(useref.assets())
+        .pipe(assets)
         .pipe(gulpif('*.js', uglify()))
-        .pipe(gulpif('*.css', minifycss()))
-        .pipe(useref.restore())
+        .pipe(gulpif('*.css', minifyCss()))
+        .pipe(assets.restore())
         .pipe(useref())
         .pipe(gulp.dest('dist'));
 });
