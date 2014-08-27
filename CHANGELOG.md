@@ -1,5 +1,10 @@
 # slush-webapp changelog
 
+# 1.0.0
+
+- Update gulpfile.js and dependencies.
+- Update to new useref API.
+
 # 0.5.0
 
 - Add tests.
