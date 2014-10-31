@@ -1,7 +1,7 @@
 {
   "name": "slush-webapp",
   "description": "Generator for HTML5 Boilerplate and Bootstrap web apps using Gulp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://github.com/jonkemp/slush-webapp",
   "author": {
     "name": "Jonathan Kemp",
